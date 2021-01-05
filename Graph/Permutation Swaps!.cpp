@@ -1,5 +1,8 @@
 link->https://www.interviewbit.com/problems/permutation-swaps/
 
+//find connected components assuming indexs as the nodes;
+//Now two nodes can only be swaped if they are in same componenet
+
 int find(int x ,vector<int>&par)
 {
     if(par[x]==-1)
