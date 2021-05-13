@@ -138,8 +138,8 @@ vector<int> topoSort(int V, vector<int> adj[]) {
     - ##### For general Graph use Bellman-ford (VE)
     - ##### No negative weight use Dijkstra's Algo(E+Vlogv)
     - ##### Directed Acycic Graph (DAG) use Topological sort(V+E)
-    - 
-- ### If we have only two type of weight then user dequeue instead of queue in BFS(0/1 BFS)
+    
+- ### If we have only two type of weight then use dequeue instead of queue in BFS(0/1 BFS)
 
 
 
