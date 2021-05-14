@@ -167,6 +167,12 @@ vector<int> topoSort(int V, vector<int> adj[]) {
 #### For Directed graph we canot use DFS/BFS
   - Kosaraju (https://github.com/raghvendra240/InterviewPrep/blob/main/Graph/Kosaraju%20Algo.cpp)
   - Tarjans  (https://github.com/raghvendra240/InterviewPrep/blob/main/Graph/Tarjan's%20Algo.cpp)
+
+```
+Back edges point from a node to one of its ancestors in the DFS tree.
+Forward edges point from a node to one of its descendants.
+Cross edges point from a node to a previously visited node that is neither an ancestor nor a descendant.
+```
  
                 
     
