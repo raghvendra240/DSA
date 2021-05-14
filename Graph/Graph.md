@@ -162,7 +162,12 @@ vector<int> topoSort(int V, vector<int> adj[]) {
 
 
 
-
+# Connected Componenets
+#### For undirected graph we can use DFS or BFS
+#### For Directed graph we canot use DFS/BFS
+  - Kosaraju (https://github.com/raghvendra240/InterviewPrep/blob/main/Graph/Kosaraju%20Algo.cpp)
+  - Tarjans  (https://github.com/raghvendra240/InterviewPrep/blob/main/Graph/Tarjan's%20Algo.cpp)
+ 
                 
     
 
