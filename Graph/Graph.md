@@ -147,21 +147,18 @@ vector<int> topoSort(int V, vector<int> adj[]) {
 
 
 ### Dijkstra Algo
-```
 - ##### Diff between BFS and Dijkstra -> BFS uses queue in extraction opertaion(O1) and dijkstra uses priorityQueue(OlogV)
 - ##### Different implementation for extraction
      - Adjacency Matrix OV
      - using Set Ologv
      - Priority queue of STL but it does not support Decrease Key. so we make pq of pair<weight,vertex> and dec. key operation we again insert same vertex with dec. weight
 
-- If there is a negative weight in the graph, then the algorithm will not work properly. Once a node has been marked as "visited", the current path to that node is marked as the shortest path to reach that node. And negative weights can alter this if the total weight can be decremented after this step has occurred.
+- ##### If there is a negative weight in the graph, then the algorithm will not work properly. Once a node has been marked as "visited", the current path to that node is marked as the shortest path to reach that node. And negative weights can alter this if the total weight can be decremented after this step has occurred.
   
-```
+
 
 ### BellmanFord Algo
-```
-##### Like other Dynamic Programming Problems, the algorithm calculates shortest paths in a bottom-up manner. It first calculates the shortest distances which have at-most one edge in the path. Then, it calculates the shortest paths with at-most 2 edges, and so on. After the i-th iteration of the outer loop, the shortest paths with at most i edges are calculated. There can be maximum |V| – 1 edges in any simple path, that is why the outer loop runs |v| – 1 times. The idea is, assuming that there is no negative weight cycle, if we have calculated shortest paths with at most i edges, then an iteration over all edges guarantees to give shortest path with at-most (i+1) edge
-```
+  ##### Like other Dynamic Programming Problems, the algorithm calculates shortest paths in a bottom-up manner. It first calculates the shortest distances which have at-most one edge in the path. Then, it calculates the shortest paths with at-most 2 edges, and so on. After the i-th iteration of the outer loop, the shortest paths with at most i edges are calculated. There can be maximum |V| – 1 edges in any simple path, that is why the outer loop runs |v| – 1 times. The idea is, assuming that there is no negative weight cycle, if we have calculated shortest paths with at most i edges, then an iteration over all edges guarantees to give shortest path with at-most (i+1) edge
 
 
 
