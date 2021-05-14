@@ -136,7 +136,9 @@ vector<int> topoSort(int V, vector<int> adj[]) {
     
 - ### weighted Graph
     - ##### For general Graph use Bellman-ford (VE)
+         - https://github.com/raghvendra240/InterviewPrep/blob/main/Graph/Floyd%20Warshall.cpp
     - ##### No negative weight use Dijkstra's Algo(E+Vlogv)
+         - https://github.com/raghvendra240/InterviewPrep/blob/main/Graph/Dijkstra's%20Algo.cpp
     - ##### Directed Acycic Graph (DAG) use Topological sort(V+E)
     
 - ### If we have only two type of weight then use dequeue instead of queue in BFS(0/1 BFS)
