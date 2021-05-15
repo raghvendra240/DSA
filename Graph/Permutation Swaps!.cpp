@@ -25,7 +25,7 @@ int Solution::solve(vector<int> &A, vector<int> &B, vector<vector<int> > &C) {
        int b=find(A[right],parent);
        
        if(a!=b)
-        return parent[a]=b;
+        parent[a]=b;
    
    }
    
