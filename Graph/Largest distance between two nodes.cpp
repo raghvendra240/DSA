@@ -13,7 +13,7 @@ int dfs(int u,vector<int>adj[])
     int a1=0,a2=0;
     for(auto v:adj[u])
     {
-            int x=dfs(v,adj)+1;
+            int x=dfs(v,adj)+1; //x is no of edges 
             
             if(x>a1) //first max
             {
