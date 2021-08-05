@@ -63,6 +63,7 @@ Code->https://www.geeksforgeeks.org/detect-cycle-direct-graph-using-colors/
      
      for(every edge u->v)
      {
+          indeg[v]--;
          if(indeg(v)==0)
            q.push(v);
      }
