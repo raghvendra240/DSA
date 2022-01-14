@@ -10,20 +10,28 @@
  * };
  */
 class Solution {
+    vector<int>dp;
 public:
-     int ans=0;
-    int pathSum(TreeNode* root, int sum) {
-        if(root){
-            dfs(root,sum);
-            pathSum(root->left,sum);
-            pathSum(root->right,sum);
+    int pathSum(TreeNode* root, int targetSum) {
+        
+        if(root==NULL)
+            return 0;
+        
+        int index=dp.size()-1;
+        int sum=root->val;
+        int res=0;
+        while(index>=0){
+            if(sum==targetSum)
+                res++;
+            sum+=dp[index];
+            index--;
         }
-        return ans;
-    }
-    void dfs(TreeNode* root, int sum){
-        if(!root)return;
-        if(root->val==sum)ans++;
-        dfs(root->left,sum-root->val);
-        dfs(root->right,sum-root->val);
+        if(sum==targetSum)
+            res++;
+        dp.push_back(root->val);
+        int left=pathSum(root->left,targetSum);
+        int right=pathSum(root->right,targetSum);
+        dp.pop_back();
+        return left+right+res;
     }
 };
