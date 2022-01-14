@@ -10,22 +10,22 @@
  * };
  */
 class Solution {
-    int help(TreeNode *root,int val){
+    int sum=0;
+    void help(TreeNode *root){
         if(!root)
-            return 0;
-        int right=help(root->right,val);
-        int org=root->val;
-        root->val+=right+val;
-        int left=help(root->left,root->val);
-        return left+right+org;
+            return;
+        help(root->right);
+        sum+=root->val;
+        root->val=sum;
+        help(root->left);
     }
 public:
     TreeNode* convertBST(TreeNode* root) {
         
         if(root==NULL)
             return NULL;
-        int val=0;
-        help(root,val);
+        sum=0;
+        help(root);
         return root;
     }
 };
