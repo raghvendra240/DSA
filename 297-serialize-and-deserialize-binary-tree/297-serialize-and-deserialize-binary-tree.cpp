@@ -25,11 +25,8 @@ class Codec {
         
         TreeNode *temp=NULL;
         if(data[index]!="NULL"){
-            stringstream geek(data[index]);
-            int x = 0;
-            geek >> x;
-            // cout<<x<<" "<<data[index]<<endl;
-            temp=new TreeNode(x);
+            
+            temp=new TreeNode(stoi(data[index]));
         }
         
         if(temp==NULL)
@@ -54,7 +51,6 @@ public:
 
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
-        // cout<<data[0]<<endl;
         if(data.length()<2)
             return NULL;
         int index=1;
@@ -75,12 +71,7 @@ public:
             nums.push_back(temp);
         }
         
-        // for(auto x : nums)
-        //     cout<<x<<' ';
-        // cout<<nums.size()<<endl;
-        
          index=0;
-        
         return help2(nums,index);
     }
 };
