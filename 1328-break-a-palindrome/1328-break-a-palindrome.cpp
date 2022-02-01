@@ -5,25 +5,26 @@ public:
         if(n<2)
             return "";
         string res="";
-        for(int i=0;i<n;i++){
-            
-            for(int j=0;j<26;j++){
-                if(i == (n-1-i))
-                    continue;
-                if(palindrome[n-1-i]!=('a'+j))
-                {
-                    string temp=palindrome;
-                    temp[i]='a'+j;
-                    
+        int low=0;
+        int high=n-1;
+        string temp,temp2;
+        char newChar;
+        while(low<high){
+            for(int i=0;i<26;i++){
+                newChar='a'+i;
+                if(palindrome[low]!=newChar){
+                    temp=palindrome;
+                    temp[low]=newChar;
+                    temp2=palindrome;
+                    temp2[high]=newChar;
                     if(res=="")
-                        res=temp;
+                        res=min(temp,temp2);
                     else
-                        res=min(res,temp);
-                    
+                        res=min(res,min(temp,temp2));
                 }
             }
+            ++low;--high;
         }
-        
         return res;
     }
 };
