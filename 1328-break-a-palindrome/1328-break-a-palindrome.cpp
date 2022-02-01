@@ -21,6 +21,7 @@ public:
                         res=min(temp,temp2);
                     else
                         res=min(res,min(temp,temp2));
+                    break;
                 }
             }
             ++low;--high;
