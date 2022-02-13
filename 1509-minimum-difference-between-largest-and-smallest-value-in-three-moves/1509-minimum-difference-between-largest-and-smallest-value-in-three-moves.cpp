@@ -1,24 +1,26 @@
 class Solution {
-    int help(int chance , vector<int>&nums,int low,int high){
-        
-        if(low>high)
-            return 0;
-        if(chance==0){
-            return (nums[high]-nums[low]);
-        }
-        
-        return min(help(chance-1,nums,low+1,high),help(chance-1,nums,low,high-1));
-    }
 public:
     int minDifference(vector<int>& nums) {
-      //   if(nums.size()<=3)
-      //       return 0;
-        sort(nums.begin(),nums.end());
-      // int ans1=abs(nums[0]-nums[nums.size()-4]);
-      // int ans2=abs(nums[3]-nums[nums.size()-1]);
-      // return min(ans1,ans2);
+        /*
+                If we can do 0 move, return max(A) - min(A)
+        If we can do 1 move, return min(the second max(A) - min(A), the max(A) - second min(A))
+        and so on.
+
+
+        Explanation
+        We have 4 plans:
+
+        kill 3 biggest elements
+        kill 2 biggest elements + 1 smallest elements
+        kill 1 biggest elements + 2 smallest elements
+        kill 3 smallest elements
+
+        */
         
-        return help(3,nums,0,nums.size()-1);
+        int n = nums.size();
+        if (n < 5) return 0;
+        sort(nums.begin(), nums.end());
+        return min({nums[n - 1] - nums[3], nums[n - 2] - nums[2], nums[n - 3] - nums[1], nums[n - 4] - nums[0]});
         
     }
 };
