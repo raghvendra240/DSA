@@ -5,7 +5,7 @@ public:
  vector<bool>tempRes;
  vector<bool>vis;
  bool help(int u){
-   vis[u]=true;
+   // vis[u]=true;
    if(outDeg[u]==0)
    {
        tempRes[u]=true;
@@ -14,6 +14,7 @@ public:
    bool res=true;
    for(auto v : map[u]){
       if(vis[v]==false){
+          vis[v]=true;
          bool temp = help(v);
          if(temp==false)
              res=false;
@@ -39,9 +40,8 @@ for(int i=0;i<n;i++){
 vector<int>res;
 for(int i=0;i<n;i++){
    if(vis[i]==false){
-       // cout<<i<<": "<<outDeg[i]<<endl;
+       vis[i]=true;
       help(i);
-      // if(temp)
    }
 }
 for(int i=0;i<tempRes.size();i++){
