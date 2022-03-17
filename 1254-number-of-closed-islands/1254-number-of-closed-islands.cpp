@@ -1,63 +1,40 @@
 class Solution {
-    int n;
-    int m;
-    // vector<vector<bool>>vis;
-    bool help(int x,int y,vector<vector<int>>&grid){
-        const int dx[] = {-1,1,0,0};
-        const int dy[] = {0,0,-1,1};
-        for(int i=0;i<4;i++){
-            int r = x+dx[i];
-            int c = y+dy[i];
-            if(r>=0 && c>=0 && r<grid.size() && c<grid[0].size()){
-                if(grid[r][c]==-1)
-                    return false;
-                if(grid[r][c]==0){
-                    grid[r][c]=-2;
-                    bool temp=help(r,c,grid);
-                    if(!temp)
-                        return false;
-                }
-            }
-        }
-        return true;
-    }
-     void fillBorder(int x,int y,vector<vector<int>>&grid){
-        const int dx[] = {-1,1,0,0};
-        const int dy[] = {0,0,-1,1};
-        for(int i=0;i<4;i++){
-            int r = x+dx[i];
-            int c = y+dy[i];
-            if(r>=0 && c>=0 && r<grid.size() && c<grid[0].size()&& grid[r][c]==0  ){
-                grid[r][c]=-1;
-                fillBorder(r,c,grid);
-            }
-        }
-    }
 public:
-    int closedIsland(vector<vector<int>>& grid) {
-        n=grid.size();
-        int res=0;
-        m=grid[0].size();
-        // vis.resize(n,vector<bool>(m,false));
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(i==0 || i==n-1 || j==0 || j==m-1){
-                    if(grid[i][j]==0){
-                        grid[i][j]=-1;
-                        fillBorder(i,j,grid);
-                    }
-                }
-            }
-        }
-         for(int i=1;i<n-1;i++){
-            for(int j=1;j<m-1;j++){
-                if(grid[i][j]==0){
-                    grid[i][j]=-2;
-                    res+=help(i,j,grid);
-                }
-            }
-        }
+     void dfs(vector<vector<int>>& grid, int i, int j) {    // making everthing water , every node connected will become water
         
-        return res;
+        if(i<0 || j<0 || i>=grid.size() || j>=grid[0].size() || grid[i][j])
+            return;
+        
+        grid[i][j] = 1;
+        
+        dfs(grid,i-1,j);
+        dfs(grid,i,j-1);
+        dfs(grid,i+1,j);
+        dfs(grid,i,j+1);
+    }
+
+    int closedIsland(vector<vector<int>>& grid) {
+        int c = 0;
+        
+        int n = grid.size();
+        int m = grid[0].size();
+        
+        for(int i=0; i<n; i++)                    // first and last column
+            dfs(grid,i,0), dfs(grid,i,m-1);
+        
+        for(int j=0; j<m; j++)
+            dfs(grid,0,j), dfs(grid,n-1,j);     // first and last row
+       
+        
+        // after removing the border connected cases 
+        // the no of times we ran dfs will give us no of  discounted lands
+        for(int i=0; i<n; i++)
+            for(int j=0; j<m; j++)
+                if(!grid[i][j]){            
+                    dfs(grid,i,j);   
+                    c++;
+                }
+        
+        return c;
     }
 };
