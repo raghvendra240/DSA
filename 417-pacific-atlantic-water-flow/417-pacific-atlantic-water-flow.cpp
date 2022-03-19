@@ -1,65 +1,45 @@
 class Solution {
-    vector<vector<int>>vis;
+    vector<vector<bool>>pac;
+    vector<vector<bool>>atl;
+    vector<vector<int>>ans;
     int n,m;
-
-    void help(int x,int y,bool &pac,bool &atl,vector<vector<int>>&grid){
-        // if(vis[x][y]==-1)
-        // {
-        //     pac=true;
-        //     atl=true;
-        //     return;
-        // }
+public:
+    void help(int x,int y,vector<vector<bool>>&vis,vector<vector<int>>&grid){
+        if(vis[x][y])
+            return;
+        vis[x][y]=true;
         const int dx[]={-1,1,0,0};
         const int dy[]={0,0,-1,1};
-        vis[x][y]=1;
-        
+        if(pac[x][y] && atl[x][y]){
+            ans.push_back({x,y});
+        }
         for(int i=0;i<4;i++){
             int r=x+dx[i];
             int c=y+dy[i];
-            if(r<0 || c<0){
-                pac=true;
-            }if(r>=n || c>=m){
-                atl=true;
-            }
-            if(pac && atl)
-            {
-                vis[x][y]=0;
-                return;
-            }
-            
-            if(r>=0 && c>=0 && r<n && c<m && grid[r][c]<=grid[x][y] && vis[r][c]==0){
-                help(r,c,pac,atl,grid);
-                if(pac && atl)
-            {
-                vis[x][y]=0;
-                return;
-            }
-            }
+            if(r>=0 && c>=0 && r<n && c<m && grid[r][c]>=grid[x][y])
+                help(r,c,vis,grid);
         }
-        vis[x][y]=0;
-        // vis[x][y]= pac && atl ? -1 : 0;
     }
-public:
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        vector<vector<int>>ans;
+        /*
+        we will try to reach some points from cornors
+        if the point is visited from right to bottom then will mark it as atl.
+        and from top or left = pac;
+        and if any value true for both then we can rach both sides from there
+        so push the result
+        */
         n=heights.size();
         m=heights[0].size();
-        vis.resize(n,vector<int>(m,0));
+        pac=atl=vector<vector<bool>>(n,vector<bool>(m,false));
+        /*left and right*/
         for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-//                 if(vis[i][j]==-1){
-//                     ans.push_back({i,j});
-//                     continue;
-//                 }
-                    
-               // if(vis[i][j]==0){
-                bool pac=false,atl=false;
-                    help(i,j,pac,atl,heights);
-                    if(pac && atl){
-                     ans.push_back({i,j});   
-                    // }
-                }
-            }
+            help(i,0,pac,heights);
+            help(i,m-1,atl,heights);
+        }
+        /*top and bottom*/
+        for(int i=0;i<m;i++){
+            help(0,i,pac,heights);
+            help(n-1,i,atl,heights);
         }
         return ans;
     }
