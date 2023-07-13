@@ -24,7 +24,7 @@ class Solution
             for(auto node : adj[u]) {
                 int weight = node[1];
                 int v = node[0];
-                if(!vis[v] && dist[v] > localDist + weight) {
+                if(dist[v] > localDist + weight) {
                     dist[v] = localDist + weight;
                     q.push({dist[v], v});
                 }
